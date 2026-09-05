@@ -4,6 +4,7 @@ import sv.edu.utec.datos.ConexionDB;
 import sv.edu.utec.datos.CrearTablas;
 import sv.edu.utec.datos.ProbarConexion;
 import sv.edu.utec.producto.CRUD_Create;
+import sv.edu.utec.producto.CRUD_Select;
 
 public class Main {
 
@@ -14,8 +15,10 @@ public class Main {
 
         CRUD_Create crear = new CRUD_Create();
 
-        crear.crearProducto(3, "Teclado de Menbrana", 7);
-        crear.crearProducto(4, "Monitor 14 pulgadas", 2);
+        crear.crearProducto(7, "Monitor 24 pulgadas", 4);
+
+        CRUD_Select leer = new CRUD_Select();
+        leer.listarProductos();
     }
 
 }
