@@ -1,47 +1,21 @@
 package sv.edu.utec;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import sv.edu.utec.datos.ConexionDB;
+import sv.edu.utec.datos.CrearTablas;
+import sv.edu.utec.datos.ProbarConexion;
+import sv.edu.utec.producto.CRUD_Create;
 
 public class Main {
 
     public static void main(String[] args) {
-        probarConexion();
 
-        crearTabla();
+        CrearTablas.crearTabla();
+        ProbarConexion.probarConexion();
+
+        CRUD_Create crear = new CRUD_Create();
+
+        crear.crearProducto(3, "Teclado de Menbrana", 7);
+        crear.crearProducto(4, "Monitor 14 pulgadas", 2);
     }
 
-    private static void probarConexion() {
-        try (Connection cn = ConexionDB.obtenerConexion()) {
-
-            if (cn != null && !cn.isClosed()) {
-                System.out.println("Conexion exitosa a: " + cn.getMetaData().getURL());
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error de conexion: " + e.getMessage());
-        }
-    }
-
-    private static void crearTabla() {
-        String sql = "CREATE TABLE IF NOT EXISTS producto (" +
-                "id INT PRIMARY KEY, " +
-                "nombre VARCHAR(50), " +
-                "cantidad INT)";
-
-        try (
-                Connection cn = ConexionDB.obtenerConexion();
-                Statement st = cn.createStatement()
-        ) {
-            st.execute(sql);
-            System.out.println("Tabla Productos Lista.");
-
-        } catch (SQLException e) {
-            System.out.println("Error al crear tabla: " + e.getMessage());
-        }
-
-    }
 }

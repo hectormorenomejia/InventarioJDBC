@@ -26,7 +26,7 @@ public class CRUD_Create {
             System.out.println("Producto creado correctamente.");
 
         } catch (SQLException e) {
-            System.out.println("Error al insertar: " + e.getMessage());
+            System.out.println("Error al crear producto: " + e.getMessage());
         }
     }
 }
